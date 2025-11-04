@@ -1,4 +1,4 @@
-package config;
+package ma.emsi.bendahou.tp3_bendahou_8.config;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
