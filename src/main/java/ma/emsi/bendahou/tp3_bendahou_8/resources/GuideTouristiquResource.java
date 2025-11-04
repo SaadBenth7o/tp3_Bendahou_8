@@ -1,0 +1,28 @@
+package ma.emsi.bendahou.tp3_bendahou_8.resources;
+
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import ma.emsi.bendahou.tp3_bendahou_8.llm.LlmClient;
+
+@Path("/guide")
+@Produces(MediaType.APPLICATION_JSON)
+public class GuideTouristiquResource {
+
+    private final LlmClient llm = new LlmClient();
+
+    @GET
+    @Path("lieu/{ville_ou_pays}")
+    public Response villeOuPays(@PathParam("ville_ou_pays") String lieu) {
+        String reponseJson = llm.demander(lieu);
+        return Response.ok(reponseJson).build();
+    }
+    // --------- BONUS : nombre d'endroits dans le chemin
+    @GET
+    @Path("lieu/{ville_ou_pays}/{nb: \\d+}")
+    public Response villeOuPaysAvecNb(@PathParam("ville_ou_pays") String lieu,
+                                      @PathParam("nb") int nb) {
+        String reponseJson = llm.demanderAvecNb(lieu, nb);
+        return Response.ok(reponseJson).build();
+    }
+}
